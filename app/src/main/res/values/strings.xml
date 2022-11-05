@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">myMv</string>
+    <color name="baseColor">#E81F1F1F</color>
+    <color name="primaryColor">#FA9F8AC0</color>
+    <color name="fontColor">#CECECE</color>
+    <color name="navBarColor">#3F3D3D</color>
+    <color name="lineColor">#73F3F1F1</color>
+    <color name="textColor">#CDCDCD</color>
+    <color name="logoutText">#80FFFFFF</color>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>
