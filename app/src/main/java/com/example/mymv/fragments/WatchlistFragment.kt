@@ -1,60 +1,81 @@
 package com.example.mymv.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymv.MovieDetail
 import com.example.mymv.R
+import com.example.mymv.adapter.WatchlistAdapter
+import com.example.mymv.models.Movie
+import com.example.mymv.models.MovieResponse
+import com.example.mymv.services.MovieApiService
+import com.example.mymv.services.UpcomingMoviesInterface
+import kotlinx.android.synthetic.main.fragment_watchlist.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WatchlistFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WatchlistFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var watchlistAdapter: WatchlistAdapter
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_watchlist, container, false)
+        val view = inflater.inflate(R.layout.fragment_watchlist, container, false)
+
+
+        return view
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WatchlistFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WatchlistFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        watchlistAdapter = WatchlistAdapter(mutableListOf(), object: WatchlistAdapter.OnAdapterListener{
+            override fun onClick(movie: Movie) {
+                startActivity(Intent(requireContext() , MovieDetail::class.java)
+                    .putExtra("title_movie", movie.title)
+                    .putExtra("poster_movie", movie.poster)
+                    .putExtra("movie_release", movie.release)
+                    .putExtra("backdrop_path", movie.backdropPath)
+                    .putExtra("movie_overview", movie.overview)
+                )
             }
+
+        })
+        upcoming_movie_list.layoutManager = LinearLayoutManager(requireContext())
+        upcoming_movie_list.setHasFixedSize(true)
+        getMovieData { movies : List<Movie> ->
+            upcoming_movie_list.adapter = WatchlistAdapter(movies, watchlistAdapter.listener)
+        }
+
+
+
+
+
     }
-}
+
+
+
+    private fun getMovieData(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance().create(UpcomingMoviesInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
+
+
+    }

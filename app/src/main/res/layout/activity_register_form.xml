@@ -41,7 +41,7 @@
         android:id="@+id/editTextFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/decorColor"
         android:textColor="@color/white"
         android:ems="7"
         android:inputType="textPersonName"
@@ -220,7 +220,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/decorColor"
         android:password="true"
         android:ems="17"
         android:inputType="textPersonName"
@@ -251,7 +251,7 @@
         android:id="@+id/editTextCfnPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/decorColor"
         android:password="true"
         android:backgroundTint="@color/white"
         android:ems="17"
@@ -283,7 +283,7 @@
         android:id="@+id/editTextLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/decorColor"
         android:backgroundTint="@color/white"
         android:ems="7"
         android:inputType="textPersonName"
@@ -312,6 +312,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.785" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

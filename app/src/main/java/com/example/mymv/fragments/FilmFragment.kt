@@ -1,60 +1,133 @@
 package com.example.mymv.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mymv.MovieDetail
 import com.example.mymv.R
+import com.example.mymv.adapter.ListPosterAdapter
+import com.example.mymv.models.Movie
+import com.example.mymv.models.MovieResponse
+import com.example.mymv.services.*
+import kotlinx.android.synthetic.main.fragment_film.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FilmFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class FilmFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    private lateinit var listPosterAdapter: ListPosterAdapter
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_film, container, false)
+        val view = inflater.inflate(R.layout.fragment_film, container, false)
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FilmFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FilmFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        listPosterAdapter = ListPosterAdapter(mutableListOf(), object: ListPosterAdapter.OnAdapterListener{
+            override fun onClick(movie: Movie) {
+                startActivity(
+                    Intent(requireContext() , MovieDetail::class.java)
+                    .putExtra("title_movie", movie.title)
+                    .putExtra("poster_movie", movie.poster)
+                    .putExtra("movie_release", movie.release)
+                    .putExtra("movie_overview", movie.overview)
+                    .putExtra("backdrop_path", movie.backdropPath)
+                )
             }
+
+        })
+
+        popular_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        popular_tv_list.setHasFixedSize(true)
+        getPopularTvData { movies : List<Movie> ->
+            popular_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        }
+
+        on_air_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        on_air_tv_list.setHasFixedSize(true)
+        getTopRatedTvData { movies : List<Movie> ->
+            on_air_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        }
+
+        top_rated_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        top_rated_tv_list.setHasFixedSize(true)
+        getOnAirTvData { movies : List<Movie> ->
+            top_rated_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        }
+
+//        latest_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+//        latest_tv_list.setHasFixedSize(true)
+//        getLatestTvData { movies : List<Movie> ->
+//            latest_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+//        }
     }
+
+    private fun getPopularTvData(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance().create(PopularTvInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
+    private fun getOnAirTvData(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance().create(TopRatedTvInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
+    private fun getTopRatedTvData(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance().create(OnAirTvInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
+    private fun getLatestTvData(callback: (List<Movie>) -> Unit) {
+        val apiService = MovieApiService.getInstance().create(LatestTVInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+
+            }
+
+        })
+    }
+
+
+
 }
