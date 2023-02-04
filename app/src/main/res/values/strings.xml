@@ -7,6 +7,7 @@
     <color name="lineColor">#73F3F1F1</color>
     <color name="textColor">#CDCDCD</color>
     <color name="logoutText">#80FFFFFF</color>
+    <color name="decorColor">#FDFDFD</color>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>
