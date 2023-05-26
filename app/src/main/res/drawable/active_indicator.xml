@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#7B86E9" /> <!-- Set the color for active dots -->
+    <corners android:radius="25dp" /> <!-- Set the corner radius -->
+    <size
+        android:width="25dp"
+        android:height="5dp" /> <!-- Set the width and height -->
+</shape>

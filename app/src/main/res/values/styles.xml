@@ -1,6 +1,13 @@
-<resources>
-    <style name="Widget.Theme.MyMv.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/black_overlay</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
     </style>
+
+    <style name="ChipTextAppearance" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="chipIconTint">#7D7D7D</item>
+    </style>
+
 </resources>
