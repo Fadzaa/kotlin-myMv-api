@@ -2,6 +2,7 @@ package com.example.mymv
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.mymv.NavBar
+import com.example.mymv.R
+import com.example.mymv.RegisterForm
 import com.example.mymv.databinding.ActivityLoginFormBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -23,15 +27,16 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginForm : AppCompatActivity() {
 
-    private lateinit var emailText : EditText
-    private lateinit var passwordText : EditText
-    private lateinit var validateButton : Button
+    private lateinit var emailText: EditText
+    private lateinit var passwordText: EditText
+    private lateinit var validateButton: Button
     private lateinit var signUpButton: Button
     private lateinit var googleButton: Button
     private lateinit var guestButton: Button
 
-    private lateinit var binding : ActivityLoginFormBinding
+    private lateinit var binding: ActivityLoginFormBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var sharedPrefs: SharedPreferences
 
     private val googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
@@ -48,6 +53,7 @@ class LoginForm : AppCompatActivity() {
         setContentView(binding.root)
         FirebaseApp.initializeApp(this)
         firebaseAuth = FirebaseAuth.getInstance()
+        sharedPrefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
 
         emailText = findViewById(R.id.editTextEmail)
         passwordText = findViewById(R.id.editTextPassword)
@@ -55,12 +61,10 @@ class LoginForm : AppCompatActivity() {
         signUpButton = findViewById(R.id.signUpButton)
 
         val button = findViewById<Button>(R.id.btnSignInWithGoogle)
-
         val backgroundDrawable = ContextCompat.getDrawable(this, R.drawable.google_button)
         button.background = backgroundDrawable
 
-
-        signUpButton.setOnClickListener{
+        signUpButton.setOnClickListener {
             val intent = Intent(this, RegisterForm::class.java)
             startActivity(intent)
             finish()
@@ -95,6 +99,10 @@ class LoginForm : AppCompatActivity() {
                 firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+
+                        // Save user data
+                        saveUserData(email, password)
+
                         val intent = Intent(this, NavBar::class.java)
                         startActivity(intent)
                     } else {
@@ -109,24 +117,33 @@ class LoginForm : AppCompatActivity() {
             }
         }
 
-
-
-
-
-
-
         googleButton = findViewById(R.id.btnSignInWithGoogle)
         googleButton.setOnClickListener {
             signInWithGoogle()
         }
+    }
 
+    private fun saveUserData(username: String, email: String) {
+        val editor: SharedPreferences.Editor = sharedPrefs.edit()
+        editor.putString(KEY_USERNAME, username)
+        editor.putString(KEY_EMAIL, email)
+        editor.apply()
+    }
 
+    private fun getUserData(): Pair<String?, String?> {
+        val username: String? = sharedPrefs.getString(KEY_USERNAME, null)
+        val email: String? = sharedPrefs.getString(KEY_EMAIL, null)
+        return Pair(username, email)
     }
 
     private fun signInAsGuest() {
         firebaseAuth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Toast.makeText(this, "Signed in as Guest", Toast.LENGTH_SHORT).show()
+
+                // Save user data
+                saveUserData("Guest", "")
+
                 val intent = Intent(this, NavBar::class.java)
                 startActivity(intent)
                 finish()
@@ -167,6 +184,10 @@ class LoginForm : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = firebaseAuth.currentUser
                     Toast.makeText(this, "Signed in with Google", Toast.LENGTH_SHORT).show()
+
+                    // Save user data
+                    saveUserData(user?.displayName ?: "", user?.email ?: "")
+
                     val intent = Intent(this, NavBar::class.java)
                     startActivity(intent)
                     finish()
@@ -177,8 +198,9 @@ class LoginForm : AppCompatActivity() {
             }
     }
 
-
-
-
-
+    companion object {
+        private const val PREFS_NAME = "MyPrefs"
+        private const val KEY_USERNAME = "username"
+        private const val KEY_EMAIL = "email"
+    }
 }

@@ -1,10 +1,12 @@
 package com.example.mymv.fragments
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+
+import android.view.*
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymv.MovieDetail
@@ -14,6 +16,7 @@ import com.example.mymv.models.MovieModel
 import com.example.mymv.models.MovieResponse
 import com.example.mymv.services.MovieApiInterface
 import com.example.mymv.services.RetrofitInstance
+import com.example.mymv.services.UpcomingMoviesInterface
 import kotlinx.android.synthetic.main.fragment_watchlist.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,6 +25,8 @@ import retrofit2.Response
 class WatchlistFragment : Fragment() {
 
     private lateinit var watchlistAdapter: WatchlistAdapter
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -32,24 +37,38 @@ class WatchlistFragment : Fragment() {
 
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        watchlistAdapter = WatchlistAdapter(mutableListOf(), object: WatchlistAdapter.OnAdapterListener{
-            override fun onClick(movieModel: MovieModel) {
-                startActivity(Intent(requireContext() , MovieDetail::class.java)
-                    .putExtra("id", movieModel.id)
+        val mutableList = emptyList<MovieModel>().toMutableList()
 
+        watchlistAdapter = WatchlistAdapter(mutableList, object : WatchlistAdapter.OnAdapterListener {
+            override fun onClick(movieModel: MovieModel) {
+                startActivity(
+                    Intent(requireContext(), MovieDetail::class.java)
+                        .putExtra("id", movieModel.id)
                 )
             }
 
         })
+
         upcoming_movie_list.layoutManager = LinearLayoutManager(requireContext())
         upcoming_movie_list.setHasFixedSize(true)
-        getMovieData { movieModels : List<MovieModel> ->
-            upcoming_movie_list.adapter = WatchlistAdapter(movieModels, watchlistAdapter.listener)
-        }
+        upcoming_movie_list.adapter = watchlistAdapter
 
+
+
+//        getMovieData { movieModels: List<MovieModel> ->
+//            watchlistAdapter.updateData(movieModels)
+//        }
+
+        upcoming_movie_list.layoutManager = LinearLayoutManager(requireContext())
+        upcoming_movie_list.setHasFixedSize(true)
+        getMovieData { movieModelsMutable : MutableList<MovieModel> ->
+            upcoming_movie_list.adapter = WatchlistAdapter(movieModelsMutable, watchlistAdapter.listener)
+        }
 
 
 
@@ -58,7 +77,7 @@ class WatchlistFragment : Fragment() {
 
 
 
-    private fun getMovieData(callback: (List<MovieModel>) -> Unit) {
+    private fun getMovieData(callback: (MutableList<MovieModel>) -> Unit) {
         val apiService = RetrofitInstance.getInstance().create(MovieApiInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
 
@@ -72,6 +91,7 @@ class WatchlistFragment : Fragment() {
 
         })
     }
+
 
 
 

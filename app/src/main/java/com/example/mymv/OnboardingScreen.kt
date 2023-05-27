@@ -35,10 +35,13 @@ class OnboardingScreen : AppCompatActivity() {
         nextButton = findViewById(R.id.nextButton)
         skipButton = findViewById(R.id.skipButton)
 
+
         skipButton.setOnClickListener{
             startActivity(Intent(this, LoginForm::class.java))
             finish()
         }
+
+
 
         dot1.setImageResource(R.drawable.active_indicator)
         dot2.setImageResource(R.drawable.inactive_indicator)

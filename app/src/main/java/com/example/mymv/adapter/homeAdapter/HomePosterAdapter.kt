@@ -1,4 +1,4 @@
-package com.example.mymv.adapter
+package com.example.mymv.adapter.homeAdapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +9,19 @@ import com.example.mymv.R
 import com.example.mymv.models.MovieModel
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class HomePosterAdapter(private val movieModels: List<MovieModel>, val listener: HomePosterAdapter.OnAdapterListener) :
+class HomePosterAdapter(private val movieModels: List<MovieModel>, val listener: OnAdapterListener) :
     RecyclerView.Adapter<HomePosterAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
+        private val IMAGE_BASE = "https://image.tmdb.org/t/p/original/"
 
         fun bindMovie(movieModel: MovieModel) {
-            Glide.with(itemView).load(IMAGE_BASE + movieModel.poster).into(itemView.movie_poster)
+
+
+            Glide.with(itemView).load(IMAGE_BASE + movieModel.poster).into(itemView.movie_backdrop)
             itemView.movie_title.text = movieModel.title
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {

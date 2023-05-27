@@ -22,18 +22,9 @@ class  NavBar : AppCompatActivity() {
         setContentView(R.layout.activity_navbar)
         replaceFragment(homeFragment)
 
-//        val mFragmentManager = supportFragmentManager
-//        val mFragmentTransaction = mFragmentManager.beginTransaction()
-//        val mFragment = ProfileFragment()
+
 
         val bottom_navigation: BottomNavigationView = findViewById(R.id.navBar)
-
-        val firstName = intent.getStringExtra("first_name")
-        val lastName = intent.getStringExtra("last_name")
-        val email = intent.getStringExtra("email")
-
-
-
 
 
 
@@ -45,11 +36,6 @@ class  NavBar : AppCompatActivity() {
                 R.id.ic_profile -> replaceFragment(profileFragment)
             }
 
-            val myBundle = Bundle()
-            myBundle.putString("first_name", firstName)
-            myBundle.putString("last_name",lastName)
-            myBundle.putString("email", email)
-            ProfileFragment().arguments = myBundle
 
             true
         }
