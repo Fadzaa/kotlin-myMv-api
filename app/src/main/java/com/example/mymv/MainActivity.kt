@@ -4,17 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymv.databinding.ActivityLoginFormBinding
-import com.example.mymv.models.Movie
-import com.example.mymv.models.MovieResponse
-import com.example.mymv.services.MovieApiInterface
-import com.example.mymv.services.MovieApiService
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.fragment_home_fragments.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 

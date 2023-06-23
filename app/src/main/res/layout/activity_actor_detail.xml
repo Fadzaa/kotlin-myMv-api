@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#18202B"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/baseColor"
+        tools:context=".ActorDetail">
+
+        <ImageView
+            android:id="@+id/ivActor"
+            android:layout_width="match_parent"
+            android:layout_height="581dp"
+            android:src="@drawable/ic_icons_google"
+            android:foreground="@drawable/gradient_shape"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvActorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="500dp"
+            android:text="Keanu Reeves"
+            android:textSize="22sp"
+            android:textColor="@color/fontColor"
+            app:fontFamily="@font/montserrat_semibold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvActorGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Male)"
+            android:textSize="12sp"
+            android:textColor="#949494"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="508dp"
+            android:fontFamily="@font/montserrat_regular"
+            app:layout_constraintStart_toEndOf="@+id/tvActorName"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvActorPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beirut, Lebanon"
+            android:textSize="12sp"
+            android:textColor="#DBDBDB"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginTop="508dp"
+            android:layout_marginEnd="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvActorBirthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="15dp"
+            android:text="1964 September 02"
+            android:textSize="12sp"
+            android:textColor="@color/fontColor"
+            app:fontFamily="@font/montserrat_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tvActorName"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textBiography"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biography"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="#EEEEEE"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvActorBirthday"/>
+
+        <TextView
+            android:id="@+id/tvActorBiography"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keanu Charles Reeves is a Canadian actor."
+            android:textColor="@color/descriptionTextColor"
+            android:textSize="11sp"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="13dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textBiography"/>
+
+        <TextView
+            android:id="@+id/textKnown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Known For"
+            android:textColor="@color/fontColor"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvActorBiography"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvKnownFor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textKnown"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -15,96 +15,64 @@ import kotlinx.android.synthetic.main.activity_register_form.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class RegisterForm : AppCompatActivity() {
-    private lateinit var registerButton : Button
-    private lateinit var fNameText : EditText
-    private lateinit var lNameText : EditText
+    private lateinit var registerButton: Button
+    private lateinit var fNameText: EditText
     private lateinit var emailText: EditText
     private lateinit var passwordText: EditText
-    private lateinit var cfmPasswordText : EditText
 
     private lateinit var binding: ActivityRegisterFormBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_form)
         binding = ActivityRegisterFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        val signButton : Button = findViewById(R. id.signButton)
+        fNameText = binding.editTextFullName
+        emailText = binding.editTextEmail
+        passwordText = binding.editTextPassword
+        registerButton = binding.signUpButton
 
-        fNameText = findViewById(R.id.editTextFirstName)
-        lNameText = findViewById(R.id.editTextLastName)
-        emailText = findViewById(R.id.editTextEmail)
-        passwordText = findViewById(R.id.editTextPassword)
-        cfmPasswordText = findViewById(R.id.editTextCfnPassword)
-        registerButton = findViewById(R.id.registerButton)
+        registerButton.setOnClickListener {
+            val fullName = fNameText.text.toString()
+            val email = emailText.text.toString()
+            val password = passwordText.text.toString()
 
-
-        binding.registerButton.setOnClickListener{
-            val firstName = fNameText.text.toString()
-            val lastName = lNameText.text.toString()
-            val email = binding.editTextEmail.text.toString()
-            val password = binding.editTextPassword.text.toString()
-            val confirmPassword = binding.editTextCfnPassword.text.toString()
-
-
-            if (firstName.isEmpty()) {
-                fNameText.error = "Please enter your first name"
+            if (fullName.isEmpty()) {
+                fNameText.error = "Please enter your full name"
                 return@setOnClickListener
-            }else if (lastName.isEmpty()) {
-                lNameText.error = "Please enter your last name"
-                return@setOnClickListener
-            }else if (email.isEmpty()) {
+            } else if (email.isEmpty()) {
                 emailText.error = "Please enter your email"
                 return@setOnClickListener
-            }else if (password.isEmpty()) {
+            } else if (password.isEmpty()) {
                 passwordText.error = "Please enter your password"
                 return@setOnClickListener
-            }else if (confirmPassword != password) {
-                cfmPasswordText.error = "Password doesn't match"
-                return@setOnClickListener
-            }else if( firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() ){
-                if (password == confirmPassword){
-                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{
-                        if (it.isSuccessful){
-                            Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
-
-                            val intentText = Intent(this, NavBar::class.java)
-                            intentText.putExtra("first_name",fNameText.text.toString())
-                            intentText.putExtra("last_name",lNameText.text.toString())
-                            intentText.putExtra("email",emailText.text.toString())
-                            startActivity(intentText)
-
-                            val intent = Intent(this, LoginForm::class.java)
-                            startActivity(intent)
-                        }else{
-                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }else(
-                        Toast.makeText(this, "Password doesn't match", Toast.LENGTH_SHORT).show()
-                )
-
-
-
             }
 
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Register Complete", Toast.LENGTH_SHORT).show()
 
+                    val intentText = Intent(this, NavBar::class.java)
+                    intentText.putExtra("full_name", fullName)
+                    intentText.putExtra("email", email)
+                    startActivity(intentText)
 
-
+                    val intent = Intent(this, LoginForm::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
-
-
-
-        signButton.setOnClickListener{
+        val signInButton: Button = findViewById(R.id.signInButton)
+        signInButton.setOnClickListener {
             val intentBtn = Intent(this, LoginForm::class.java)
             startActivity(intentBtn)
-
-
+            finish()
         }
     }
 }

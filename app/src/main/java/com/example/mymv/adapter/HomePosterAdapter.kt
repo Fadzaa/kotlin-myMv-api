@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mymv.R
-import com.example.mymv.models.Movie
+import com.example.mymv.models.MovieModel
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class HomePosterAdapter(private val movies: List<Movie>, val listener: HomePosterAdapter.OnAdapterListener) :
+class HomePosterAdapter(private val movieModels: List<MovieModel>, val listener: HomePosterAdapter.OnAdapterListener) :
     RecyclerView.Adapter<HomePosterAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
-        fun bindMovie(movie: Movie) {
-            Glide.with(itemView).load(IMAGE_BASE + movie.poster).into(itemView.movie_poster)
-            itemView.movie_title.text = movie.title
+        fun bindMovie(movieModel: MovieModel) {
+            Glide.with(itemView).load(IMAGE_BASE + movieModel.poster).into(itemView.movie_poster)
+            itemView.movie_title.text = movieModel.title
         }
     }
 
@@ -28,17 +28,17 @@ class HomePosterAdapter(private val movies: List<Movie>, val listener: HomePoste
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movies.get(position))
-        val movies = movies[position]
+        holder.bindMovie(movieModels.get(position))
+        val movies = movieModels[position]
 
         holder.itemView.setOnClickListener {
             listener.onClick(movies)
         }
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = movieModels.size
 
     interface OnAdapterListener  {
-        fun onClick(movie : Movie)
+        fun onClick(movieModel : MovieModel)
     }
 }

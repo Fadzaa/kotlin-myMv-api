@@ -201,7 +201,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="Logout"
         android:textAllCaps="false"
-        android:textColor="@color/logoutText"
+
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

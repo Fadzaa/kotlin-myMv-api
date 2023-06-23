@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymv.MovieDetail
 import com.example.mymv.R
 import com.example.mymv.adapter.ListPosterAdapter
-import com.example.mymv.models.Movie
+import com.example.mymv.models.MovieModel
 import com.example.mymv.models.MovieResponse
 import com.example.mymv.services.*
 import kotlinx.android.synthetic.main.fragment_film.*
@@ -34,14 +34,14 @@ class FilmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         listPosterAdapter = ListPosterAdapter(mutableListOf(), object: ListPosterAdapter.OnAdapterListener{
-            override fun onClick(movie: Movie) {
+            override fun onClick(movieModel: MovieModel) {
                 startActivity(
                     Intent(requireContext() , MovieDetail::class.java)
-                    .putExtra("title_movie", movie.title)
-                    .putExtra("poster_movie", movie.poster)
-                    .putExtra("movie_release", movie.release)
-                    .putExtra("movie_overview", movie.overview)
-                    .putExtra("backdrop_path", movie.backdropPath)
+                    .putExtra("title_movie", movieModel.title)
+                    .putExtra("poster_movie", movieModel.poster)
+                    .putExtra("movie_release", movieModel.release)
+                    .putExtra("movie_overview", movieModel.overview)
+                    .putExtra("backdrop_path", movieModel.backdropPath)
                 )
             }
 
@@ -49,20 +49,20 @@ class FilmFragment : Fragment() {
 
         popular_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
         popular_tv_list.setHasFixedSize(true)
-        getPopularTvData { movies : List<Movie> ->
-            popular_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        getPopularTvData { movieModels : List<MovieModel> ->
+            popular_tv_list.adapter = ListPosterAdapter(movieModels,listPosterAdapter.listener)
         }
 
         on_air_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
         on_air_tv_list.setHasFixedSize(true)
-        getTopRatedTvData { movies : List<Movie> ->
-            on_air_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        getTopRatedTvData { movieModels : List<MovieModel> ->
+            on_air_tv_list.adapter = ListPosterAdapter(movieModels,listPosterAdapter.listener)
         }
 
         top_rated_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
         top_rated_tv_list.setHasFixedSize(true)
-        getOnAirTvData { movies : List<Movie> ->
-            top_rated_tv_list.adapter = ListPosterAdapter(movies,listPosterAdapter.listener)
+        getOnAirTvData { movieModels : List<MovieModel> ->
+            top_rated_tv_list.adapter = ListPosterAdapter(movieModels,listPosterAdapter.listener)
         }
 
 //        latest_tv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
@@ -72,11 +72,11 @@ class FilmFragment : Fragment() {
 //        }
     }
 
-    private fun getPopularTvData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(PopularTvInterface::class.java)
+    private fun getPopularTvData(callback: (List<MovieModel>) -> Unit) {
+        val apiService = RetrofitInstance.getInstance().create(PopularTvInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
+                return callback(response.body()!!.movieModels)
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
@@ -86,11 +86,11 @@ class FilmFragment : Fragment() {
         })
     }
 
-    private fun getOnAirTvData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(TopRatedTvInterface::class.java)
+    private fun getOnAirTvData(callback: (List<MovieModel>) -> Unit) {
+        val apiService = RetrofitInstance.getInstance().create(TopRatedTvInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
+                return callback(response.body()!!.movieModels)
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
@@ -100,11 +100,11 @@ class FilmFragment : Fragment() {
         })
     }
 
-    private fun getTopRatedTvData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(OnAirTvInterface::class.java)
+    private fun getTopRatedTvData(callback: (List<MovieModel>) -> Unit) {
+        val apiService = RetrofitInstance.getInstance().create(OnAirTvInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
+                return callback(response.body()!!.movieModels)
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
@@ -114,11 +114,11 @@ class FilmFragment : Fragment() {
         })
     }
 
-    private fun getLatestTvData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(LatestTVInterface::class.java)
+    private fun getLatestTvData(callback: (List<MovieModel>) -> Unit) {
+        val apiService = RetrofitInstance.getInstance().create(LatestTVInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
+                return callback(response.body()!!.movieModels)
             }
 
             override fun onFailure(call: Call<MovieResponse>, t: Throwable) {

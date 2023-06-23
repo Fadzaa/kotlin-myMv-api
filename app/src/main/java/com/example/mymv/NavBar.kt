@@ -2,25 +2,12 @@ package com.example.mymv
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymv.fragments.FilmFragment
 import com.example.mymv.fragments.HomeFragments
 import com.example.mymv.fragments.ProfileFragment
 import com.example.mymv.fragments.WatchlistFragment
-import com.example.mymv.models.Movie
-import com.example.mymv.models.MovieResponse
-import com.example.mymv.services.MovieApiInterface
-import com.example.mymv.services.MovieApiService
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_navbar.*
-import kotlinx.android.synthetic.main.fragment_home_fragments.*
-import kotlinx.android.synthetic.main.fragment_profile.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class  NavBar : AppCompatActivity() {
     private val homeFragment = HomeFragments()
