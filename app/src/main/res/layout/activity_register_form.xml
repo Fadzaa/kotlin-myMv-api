@@ -6,7 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baseColor"
-    tools:context=".RegisterForm">
+    tools:context=".initialPage.RegisterForm">
+
+    <ProgressBar
+        android:id="@+id/pbRegister"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:progressTint="@color/primaryColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
 
 
@@ -71,6 +82,7 @@
         android:background="@drawable/edittext_background"
         android:layout_marginTop="21dp"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:textSize="14sp"
         android:paddingStart="20dp"
         android:drawableStart="@drawable/ic_pen"
@@ -103,6 +115,7 @@
         android:background="@drawable/edittext_background"
         android:layout_marginTop="21dp"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:textSize="14sp"
         android:paddingStart="20dp"
         android:drawableStart="@drawable/ic_mail"
@@ -136,6 +149,7 @@
         android:background="@drawable/edittext_background"
         android:layout_marginTop="21dp"
         android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:paddingStart="20dp"
         android:drawableStart="@drawable/ic_lock"
         android:textSize="14sp"

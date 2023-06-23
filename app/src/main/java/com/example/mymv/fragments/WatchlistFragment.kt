@@ -1,22 +1,19 @@
 package com.example.mymv.fragments
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import android.view.*
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mymv.MovieDetail
+import com.example.mymv.detail.MovieDetail
 import com.example.mymv.R
 import com.example.mymv.adapter.WatchlistAdapter
 import com.example.mymv.models.MovieModel
 import com.example.mymv.models.MovieResponse
-import com.example.mymv.services.MovieApiInterface
+import com.example.mymv.services.movieInterface.MoviePopularInterface
 import com.example.mymv.services.RetrofitInstance
-import com.example.mymv.services.UpcomingMoviesInterface
+import com.example.mymv.services.movieInterface.UpcomingMoviesInterface
 import kotlinx.android.synthetic.main.fragment_watchlist.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,10 +42,10 @@ class WatchlistFragment : Fragment() {
         val mutableList = emptyList<MovieModel>().toMutableList()
 
         watchlistAdapter = WatchlistAdapter(mutableList, object : WatchlistAdapter.OnAdapterListener {
-            override fun onClick(movieModel: MovieModel) {
+            override fun onClick(movieModel: String) {
                 startActivity(
                     Intent(requireContext(), MovieDetail::class.java)
-                        .putExtra("id", movieModel.id)
+                        .putExtra("id", movieModel)
                 )
             }
 
@@ -78,7 +75,7 @@ class WatchlistFragment : Fragment() {
 
 
     private fun getMovieData(callback: (MutableList<MovieModel>) -> Unit) {
-        val apiService = RetrofitInstance.getInstance().create(MovieApiInterface::class.java)
+        val apiService = RetrofitInstance.getInstance().create(UpcomingMoviesInterface::class.java)
         apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {

@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavBar">
+    tools:context=".initialPage.NavBar">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1C1C1C"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        android:background="#23272D"
+        app:itemIconTint="@color/primaryColor"
+        app:itemTextColor="@color/primaryColor"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu" />
+
+<!--    app:itemTextAppearanceActive=""-->
+<!--    app:itemTextAppearanceInactive=""-->
+<!--    app:itemActiveIndicatorStyle=""-->
 
     <FrameLayout
         android:id="@+id/fragment_container"

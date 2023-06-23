@@ -39,6 +39,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildscript {
+        ext.kotlin_version = '1.6.0'
+    }
 }
 
 dependencies {
@@ -55,9 +59,13 @@ dependencies {
 
     //Firebase Authentication
     implementation 'com.google.firebase:firebase-auth:22.0.0'
+    implementation 'com.google.firebase:firebase-firestore:24.6.1'
+
 
     //Glide Library for Network Image
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -65,6 +73,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Kotlin Courotines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1' //
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1' //
 

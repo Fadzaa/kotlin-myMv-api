@@ -18,7 +18,10 @@ class HomePosterAdapter(private val movieModels: List<MovieModel>, val listener:
         fun bindMovie(movieModel: MovieModel) {
 
 
-            Glide.with(itemView).load(IMAGE_BASE + movieModel.poster).into(itemView.movie_backdrop)
+            Glide.with(itemView)
+                .load(IMAGE_BASE + movieModel.poster)
+                .placeholder(R.drawable.placeholder)
+                .into(itemView.movie_backdrop)
             itemView.movie_title.text = movieModel.title
         }
 

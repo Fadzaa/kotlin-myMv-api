@@ -13,6 +13,17 @@
         android:layout_height="match_parent"
         tools:context=".fragments.HomeFragments">
 
+        <ProgressBar
+            android:id="@+id/pbHome"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:progressTint="@color/primaryColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/welcomeText"
             android:layout_width="wrap_content"
@@ -31,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:text="Fattah Anggit Al Dzakwan"
+            android:text="Fattah Anggit"
             android:textColor="@color/primaryColor"
             android:textSize="16sp"
             android:layout_marginStart="17dp"
@@ -59,7 +70,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="19dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/search_button"
             android:textColor="#7D7D7D"
             android:text="Search"
@@ -122,29 +133,29 @@
             android:layout_marginTop="12dp"
             app:layout_constraintTop_toBottomOf="@+id/theaterText"/>
 
-        <TextView
-            android:id="@+id/trailerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="New Trailer Release"
-            android:textColor="@color/subHeaderColor"
-            android:textSize="14sp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/rv_in_theatre"
-            app:layout_constraintStart_toStartOf="parent"/>
+<!--        <TextView-->
+<!--            android:id="@+id/trailerText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/montserrat_semibold"-->
+<!--            android:text="New Trailer Release"-->
+<!--            android:textColor="@color/subHeaderColor"-->
+<!--            android:textSize="14sp"-->
+<!--            android:layout_marginStart="17dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/rv_in_theatre"-->
+<!--            app:layout_constraintStart_toStartOf="parent"/>-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_new_trailer"
-            android:layout_width="match_parent"
-            android:layout_height="115dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/trailerText"
-            app:layout_constraintStart_toStartOf="parent">
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_new_trailer"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="115dp"-->
+<!--            android:layout_marginStart="17dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/trailerText"-->
+<!--            app:layout_constraintStart_toStartOf="parent">-->
 
-        </androidx.recyclerview.widget.RecyclerView>
+<!--        </androidx.recyclerview.widget.RecyclerView>-->
 
         <TextView
             android:id="@+id/trendingText"
@@ -156,13 +167,13 @@
             android:textSize="14sp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="22dp"
-            app:layout_constraintTop_toBottomOf="@+id/rv_new_trailer"
+            app:layout_constraintTop_toBottomOf="@+id/rv_in_theatre"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_trending_movies"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -171,11 +182,11 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
-            android:id="@+id/onAirText"
+            android:id="@+id/topRatedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="On Air Movies"
+            android:text="Top Rated Movie"
             android:textColor="@color/subHeaderColor"
             android:textSize="14sp"
             android:layout_marginStart="17dp"
@@ -183,32 +194,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_trending_movies" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/on_air_movie_list"
-            android:layout_width="match_parent"
-            android:layout_height="209dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/onAirText"/>
-
-
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_rated_movie_list"
             android:layout_width="match_parent"
-            android:layout_height="209dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="17dp"
+            android:layout_marginBottom="40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/on_air_movie_list">
+            app:layout_constraintTop_toBottomOf="@+id/topRatedText">
 
         </androidx.recyclerview.widget.RecyclerView>
-
-
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

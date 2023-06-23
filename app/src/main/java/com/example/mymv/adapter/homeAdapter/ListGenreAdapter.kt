@@ -15,8 +15,12 @@ import kotlinx.android.synthetic.main.genre_button.view.*
 class ListGenreAdapter(private val genreModels: List<GenreModel>, val listener: OnAdapterListener) :
     RecyclerView.Adapter<ListGenreAdapter.GenreViewHolder>() {
 
+
+
     private lateinit var btnGenre: Button
     class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+
 
 
         fun bindGenre(genreModel: GenreModel) {
@@ -46,4 +50,6 @@ class ListGenreAdapter(private val genreModels: List<GenreModel>, val listener: 
     interface OnAdapterListener  {
         fun onClick(genreModel: GenreModel )
     }
+
+
 }

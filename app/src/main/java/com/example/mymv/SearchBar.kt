@@ -1,5 +1,7 @@
 package com.example.mymv
 
+import android.content.Intent
+import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymv.adapter.WatchlistAdapter
+import com.example.mymv.detail.MovieDetail
 import com.example.mymv.models.MovieModel
 import com.example.mymv.models.MovieResponse
 import com.example.mymv.services.SearchApiInterface
@@ -74,7 +77,10 @@ class SearchBar : AppCompatActivity() {
 
 // Initialize WatchlistAdapter
         movieAdapter = WatchlistAdapter(mutableListOf(), object : WatchlistAdapter.OnAdapterListener {
-            override fun onClick(movieModel: MovieModel) {
+            override fun onClick(movieId: String) {
+                startActivity(Intent(this@SearchBar, MovieDetail::class.java)
+                    .putExtra("id", movieId)
+                )
                 // Handle item click event
             }
         })

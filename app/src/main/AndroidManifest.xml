@@ -17,19 +17,28 @@
         android:theme="@style/Theme.MyMv"
         tools:targetApi="31">
         <activity
+            android:name=".detail.SeriesDetail"
+            android:exported="false" />
+        <activity
+            android:name=".ListGenreSeries"
+            android:exported="false" />
+        <activity
+            android:name=".SearchBarSeries"
+            android:exported="false" />
+        <activity
             android:name=".ListGenreMovie"
             android:exported="false" />
         <activity
             android:name=".SearchBar"
             android:exported="false" />
         <activity
-            android:name=".ActorDetail"
+            android:name=".detail.ActorDetail"
             android:exported="false" />
         <activity
-            android:name=".OnboardingScreen"
+            android:name=".initialPage.OnboardingScreen"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".initialPage.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,25 +47,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MovieDetail"
+            android:name=".detail.MovieDetail"
             android:exported="false" />
         <activity
-            android:name=".NavBar"
+            android:name=".initialPage.NavBar"
             android:exported="false" />
         <activity
-            android:name=".LoginForm"
+            android:name=".initialPage.LoginForm"
             android:exported="false" />
         <activity
-            android:name=".RegisterForm"
+            android:name=".initialPage.RegisterForm"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".initialPage.MainActivity"
+            android:exported="false">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <meta-data

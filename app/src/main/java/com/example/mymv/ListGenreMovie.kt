@@ -7,20 +7,19 @@ import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymv.adapter.WatchlistAdapter
-import com.example.mymv.adapter.homeAdapter.ListGenreAdapter
-import com.example.mymv.models.GenreModel
+import com.example.mymv.detail.MovieDetail
 import com.example.mymv.models.MovieModel
 import com.example.mymv.models.MovieResponse
-import com.example.mymv.services.ListGenreMovieInterface
+import com.example.mymv.services.movieInterface.ListGenreMovieInterface
 import com.example.mymv.services.RetrofitInstance
 import kotlinx.android.synthetic.main.activity_list_genre_movie.*
-import kotlinx.android.synthetic.main.fragment_home_fragments.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ListGenreMovie : AppCompatActivity() {
     private lateinit var genreName: TextView
+    private lateinit var genreSlogan: TextView
     private lateinit var listGenreMovieAdapter: WatchlistAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,25 +27,26 @@ class ListGenreMovie : AppCompatActivity() {
         setContentView(R.layout.activity_list_genre_movie)
 
         genreName = findViewById(R.id.tvGenreName)
+        genreSlogan= findViewById(R.id.tvSloganGenre)
 
         val genreListName = intent.getStringExtra("genre_name")
 
-        genreName.text = genreListName
 
+        genreName.text = genreListName
+        genreSlogan.text = "List of $genreListName Movies"
 
         val mutableList = emptyList<MovieModel>().toMutableList()
 
 
 
         listGenreMovieAdapter = WatchlistAdapter(mutableList, object: WatchlistAdapter.OnAdapterListener{
-            override fun onClick(movieModel: MovieModel) {
-//
-                Log.d("ErrorCheck", "This is ${movieModel.overview}")
-//                startActivity(
-//                    Intent(this@ListGenreMovie, ListGenreMovie::class.java)
-//                    .putExtra("genre_id", genreModel.id)
-//                    .putExtra("genre_name", genreModel.name)
-//                )
+            override fun onClick(movieId: String) {
+
+
+                startActivity(
+                    Intent(this@ListGenreMovie, MovieDetail::class.java)
+                    .putExtra("id", movieId)
+                )
 
 
             }

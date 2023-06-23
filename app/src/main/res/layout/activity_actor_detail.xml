@@ -11,13 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/baseColor"
-        tools:context=".ActorDetail">
+        tools:context=".detail.ActorDetail">
+
+        <ProgressBar
+            android:id="@+id/pbActorDetails"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:progressTint="@color/primaryColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ivActor"
             android:layout_width="match_parent"
             android:layout_height="581dp"
-            android:src="@drawable/ic_icons_google"
             android:foreground="@drawable/gradient_shape"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="500dp"
-            android:text="Keanu Reeves"
+
             android:textSize="22sp"
             android:textColor="@color/fontColor"
             app:fontFamily="@font/montserrat_semibold"
@@ -38,7 +48,6 @@
             android:id="@+id/tvActorGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="(Male)"
             android:textSize="12sp"
             android:textColor="#949494"
             android:layout_marginStart="5dp"
@@ -51,7 +60,6 @@
             android:id="@+id/tvActorPlace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beirut, Lebanon"
             android:textSize="12sp"
             android:textColor="#DBDBDB"
             android:fontFamily="@font/montserrat_medium"
@@ -66,7 +74,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginStart="15dp"
-            android:text="1964 September 02"
             android:textSize="12sp"
             android:textColor="@color/fontColor"
             app:fontFamily="@font/montserrat_medium"
@@ -90,7 +97,6 @@
             android:id="@+id/tvActorBiography"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Keanu Charles Reeves is a Canadian actor."
             android:textColor="@color/descriptionTextColor"
             android:textSize="11sp"
             android:fontFamily="@font/montserrat_regular"
