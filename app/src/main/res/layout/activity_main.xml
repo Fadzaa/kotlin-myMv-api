@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/baseColor"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".initialPage.MainActivity">
     <!--    android:fitsSystemWindows="true"-->
 
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="rvSearchBar" type="id" />
+    <item name="rvSearchBarSeries" type="id" />
+    <item name="tvGenres" type="id" />
+    <item name="genreName" type="id" />
+</resources>

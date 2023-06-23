@@ -4,10 +4,10 @@
     </style>
 
     <style name="ChipTextAppearance" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="colorPrimary">#007B86E9</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/primaryColor</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="chipIconTint">#7D7D7D</item>
     </style>
 
 </resources>

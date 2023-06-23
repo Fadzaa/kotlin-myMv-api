@@ -3,7 +3,8 @@
     <item
         android:id="@+id/ic_home"
         android:icon="@drawable/ic_vector"
-        android:title="Home" />
+        android:title="Home"
+        android:actionLayout="@layout/bottom_nav_layout"/>
 
     <item
 
@@ -14,7 +15,7 @@
     <item
         android:id="@+id/ic_watchlist"
         android:icon="@drawable/ic_watchlist"
-        android:title="Watchlist"/>
+        android:title="Upcoming"/>
 
     <item
         android:id="@+id/ic_profile"

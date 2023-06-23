@@ -1,0 +1,57 @@
+package com.example.mymv.models
+
+
+import android.os.Parcel
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+@Parcelize
+data class TVModel(
+    @SerializedName("id")
+    val id : String?,
+
+    @SerializedName("name")
+    val title : String?,
+
+    @SerializedName("first_air_date")
+    val release : String?,
+
+    @SerializedName("poster_path")
+    val poster : String?,
+
+    @SerializedName("overview")
+    val overview : String?,
+
+    @SerializedName("backdrop_path")
+    val backdropPath : String?,
+
+//    @SerializedName("runtime")
+//    val runtime: String?,
+
+    @SerializedName("vote_average")
+    val voteAverage:String?,
+
+    @SerializedName("vote_count")
+    val voteCount: String?,
+
+    @SerializedName("genres")
+    val genres: ArrayList<Genre>?
+
+
+
+
+) : Parcelable {
+    constructor() : this("", "", "", "", "",  "", "", "", ArrayList())
+}
+
+@Parcelize
+data class TVGenre(
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String
+) : Parcelable {
+    constructor() : this(0,"")
+}
