@@ -14,11 +14,10 @@ An Android application developed in Kotlin leveraging the TMDB API for accessing
 
 ## About This Project
 
-This project marks my first project into Android development using Kotlin. I embarked on this project as a means to learn and explore the world of mobile app development. I acknowledge that there might be areas where improvements can be made. This project represents a significant learning experience for me and an opportunity for growth as a developer.
+This project marks my first foray into Android development using Kotlin. As the sole creator and designer of this app, I took a hands-on approach to not only develop the functionality but also design the UI/UX elements. The design and layout of the app were crafted to enhance user experience and provide an intuitive interface.
 
-Your feedback, suggestions, and contributions are not only welcomed but highly appreciated. Feel free to reach out or provide insights to help improve this project.
+Your feedback, suggestions, and contributions to the code or design are not only welcomed but highly appreciated. This project is a testament to my efforts in both development and UI/UX design, marking a significant step in my journey to enhance my skills in mobile app development.
 
-Thank you for taking the time to explore this work-in-progress application!
 
 ## Introduction
 
@@ -51,18 +50,27 @@ Explain the project structure here, e.g., how packages, activities, fragments, o
 To run this project locally, follow these steps:
 
 1. Clone the repository.
-3. Open the project using Android Studio.
-4. Build and run the application on an emulator or a connected device.
+2. Open the project using Android Studio.
+3. Build and run the application on an emulator or a connected device.
 
 ## Screenshots
 
-Insert screenshots or GIFs showcasing different parts of the application.
+Here are some visual representations of the app:
+
+<img src="screenshots/poster_apps.png" width="400">
+<img src="screenshots/screenshot_home.jpg" width="400">
+<img src="screenshots/movie_details.jpg" width="400">
+<img src="screenshots/cast_details.jpg" width="400">
+<img src="screenshots/upcoming.jpg" width="400">
+<img src="screenshots/onboarding.jpg" width="400">
+
+
 
 ## License
 
-This project is the intellectual property of the creator and owner Fattah Anggit Al Dzkwan. All rights are reserved. It is intended for personal use and may not be distributed, modified, or used for any purpose without explicit permission from the owner.
+This project is the intellectual property of the creator and owner Fattah Anggit Al Dzakwan. All rights are reserved. It is intended for personal use and may not be distributed, modified, or used for any purpose without explicit permission from the owner.
 
 Please note that the usage of TMDB API is subject to their terms and conditions. For information about using the TMDB API, refer to their official documentation.
 
-For any questions or inquiries regarding the project or its use, please contact [your email or preferred contact method].
+For any questions or inquiries regarding the project or its use, please contact fadza20@gmail.com .
 
